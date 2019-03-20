@@ -60,7 +60,6 @@ def print_table(log):
 def main(args):
     log = read_log(LOG_FILE)
 
-    
     if args.interval:
         add_checkpoint(log['data'], args.interval)
         log['error'] = ''

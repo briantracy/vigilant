@@ -1,0 +1,11 @@
++----------+
+| vigilant |
++----------+
+
+This software keeps track of how long you use your computer every day.
+This is accomplished by creating a daemon that runs the included 
+python script every 15 (by default) minutes while your computer is not
+asleep. Each time the script is invoked, it writes this to file. When
+you want to see your metrics, simply invoke the script to see a 
+tabular readout.
+

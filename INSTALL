@@ -10,4 +10,21 @@ normally show up /var/log/system.log.
 2) Set the permissions of this file to be exactly that of the
     other files in this directory. This is typically done with 
     `chmod 644 <file>`
-3) 
+3) Change the file path to the script in the .plist
+4) Change the file path of the LOG_FILE in the script
+5) Read the next section on using `launchctl`
+
+launchctl
+---------
+1) sudo launchctl load ~/Library/LaunchAgents/xyz.briantracy.vigilant.plist
+2) sudo launchctl unload ~/Library/LaunchAgents/xyz.briantracy.vigilant.plist
+
+Troubleshooting
+---------------
+1) Remember to tail the system log (see above note)
+    - In the system log, there can be an error about permissions.
+    - In the system log, there can be an error about abnormal exit status. 
+        This one means that the script is failing somehow. Try running
+        it manually to see what's happening.
+2) The .plist specifies RunAtLoad, so unloading and reloading with `launchctl`
+    will restart the daemon.
