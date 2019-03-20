@@ -22,29 +22,28 @@ def add_checkpoint(data, interval):
     data[ts] = prev + interval
 
 def read_log(fname):
-    with open(fname, 'r') as l:
-        try:
+    try:
+        with open(fname, 'r') as l:
             return json.load(l)
-        except Exception:
-            return {'program_name': 'vigilant', 'data': {}}
+    except Exception:
+        return {'program_name': 'vigilant', 'data': {}}
 
 def write_log(log, fname):
-    with open(fname, 'w') as l:
-        try:
+    try:
+        with open(fname, 'w') as l:
             l.write(json.dumps(log, indent=2, sort_keys=True))
-        except:
-            print('Could not write to log: ' + LOG_FILE)
-            sys.exit(1)
+    except:
+        print('Could not write to log: ' + LOG_FILE)
+        sys.exit(1)
 
 def today_string():
     return datetime.datetime.now().strftime(DATE_FORMAT)
 
-def error(log, msg):
-    log['error'] = msg
-    write_log(log, LOG_FILE)
-    sys.exit(1)
+def print_table(data):
+    if not data:
+        print('no data to display')
+        return
 
-def print_table(log):
     horz = '+' + '-'*(len(today_string()) + 2) + '+' + \
              '-'*(len('00h00m')+2) + '+'
     def table_time(mins):
@@ -52,22 +51,21 @@ def print_table(log):
     def row(l, r):
         print('| {} | {} |'.format(l, r))
 
-    print(horz)
-    for key in sorted(log['data'].keys()):
-        row(key, table_time(log['data'][key]))
+    for key in sorted(data.keys(), key=lambda s: datetime.datetime.strptime(s, DATE_FORMAT)):
         print(horz)
+        row(key, table_time(data[key]))
+    print(horz)
 
 def main(args):
     log = read_log(LOG_FILE)
 
-    if args.interval:
+    if args.interval is not None:
         add_checkpoint(log['data'], args.interval)
-        log['error'] = ''
         write_log(log, LOG_FILE)
     elif args.disp_log:
         print(LOG_FILE)
     else:
-        print_table(log)
+        print_table(log['data'])
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
