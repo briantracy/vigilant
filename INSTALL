@@ -1,0 +1,13 @@
++-------------------------+
+| vigilant - installation |
++-------------------------+
+
+Note: working with macOS `launchd` is really annoying and 
+may take some finessing. If you encounter errors, they will
+normally show up /var/log/system.log.
+
+1) Copy the .plist file into ~/Library/LaunchAgents
+2) Set the permissions of this file to be exactly that of the
+    other files in this directory. This is typically done with 
+    `chmod 644 <file>`
+3) 
