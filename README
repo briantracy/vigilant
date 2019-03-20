@@ -9,3 +9,20 @@ asleep. Each time the script is invoked, it writes this to file. When
 you want to see your metrics, simply invoke the script to see a 
 tabular readout.
 
+Here is a typical readout:
+
+$ vigilant
++-----------------+--------+
+| Mon Mar 18 2019 | 02h45m |
++-----------------+--------+
+| Tue Mar 19 2019 | 05h45m |
++-----------------+--------+
+
+
+The following arguments are supported:
+    1. -h, --help
+    2. --checkpoint <int>
+        This is called by the daemon every <int> minutes
+    3. -l
+        Prints the path of the LOG_FILE
+

@@ -19,6 +19,15 @@ launchctl
 1) sudo launchctl load ~/Library/LaunchAgents/xyz.briantracy.vigilant.plist
 2) sudo launchctl unload ~/Library/LaunchAgents/xyz.briantracy.vigilant.plist
 
+
+It is useful to move the script into your $PATH, so you can invoke from the shell.
+
+$ chmod +x ./vigilant.py
+$ mv ./vigilant.py /usr/local/bin/vigilant
+$ vigilant
+    ...
+
+
 Troubleshooting
 ---------------
 1) Remember to tail the system log (see above note)
