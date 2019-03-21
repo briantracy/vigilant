@@ -25,7 +25,7 @@ def read_log(fname):
     try:
         with open(fname, 'r') as l:
             return json.load(l)
-    except Exception:
+    except:
         return {'program_name': 'vigilant', 'data': {}}
 
 def write_log(log, fname):
