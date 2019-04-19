@@ -53,11 +53,15 @@ def print_table(data):
         return '{:02d}h{:02d}m'.format(mins // 60, mins % 60)
     def row(l, r, mins):
         print('| {} | {} | {} '.format(l, r, '*' * (mins // 30)))
-
+    
+    total = 0
     for key in sort_keys(data):
         print(horz)
-        row(key, table_time(data[key]), data[key])
+        mins = data[key]
+        total = total + mins
+        row(key, table_time(mins), mins)
     print(horz)
+    print('avg: ' + table_time(total // len(data)))
 
 
 
