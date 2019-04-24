@@ -54,15 +54,27 @@ def print_table(data):
     def row(l, r, mins):
         print('| {} | {} | {} '.format(l, r, '*' * (mins // 30)))
     
-    total = 0
+    times = []
     for key in sort_keys(data):
         print(horz)
         mins = data[key]
-        total = total + mins
+        times.append(mins)
         row(key, table_time(mins), mins)
     print(horz)
-    print('avg: ' + table_time(total // len(data)))
 
+    def average(l):
+        return sum(l) // len(l)
+
+    def median(l):
+        if len(l) % 2 == 0:
+            return (l[len(l) // 2] + l[(len(l) // 2) - 1]) // 2
+        else:
+            return l[len(l) // 2]
+    
+    print('avg: ' + table_time(average(times)))
+    times.sort()
+    print('med: ' + table_time(median(times)))
+    print('max: ' + table_time(max(times)))
 
 
 def main(args):
